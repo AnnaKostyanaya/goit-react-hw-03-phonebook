@@ -64,41 +64,41 @@ checkName = (name) => {
   }
 }
 
-  deleteContact = nameId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== nameId),
-    }));
-  };
+deleteContact = nameId => {
+  this.setState(prevState => ({
+    contacts: prevState.contacts.filter(contact => contact.id !== nameId),
+  }));
+};
 
-  changeFilter = event => {
-    this.setState(
-      { filter: event.currentTarget.value }
-      );
-  };
-
-  getVisibleContacts = () => {
-    const { filter, contacts } = this.state;
-    const lowerCaseFilter = filter.toLowerCase();
-
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(lowerCaseFilter),
+changeFilter = event => {
+  this.setState(
+    { filter: event.currentTarget.value }
     );
-  };
+};
 
+getVisibleContacts = () => {
+  const { filter, contacts } = this.state;
+  const lowerCaseFilter = filter.toLowerCase();
 
-  render() {
-  const visibleContacts = this.getVisibleContacts();
-
-  return (
-    <div className={style.container}>
-      <h1 className={style.main_title}>Phonebook</h1>
-      <ContactForm onSubmit={this.formSubmitHandler} onCheck={this.checkName}/>
-          
-      <h2 className={style.title}>Contacts</h2>
-      <Filter value={this.state.filter} onChange={this.changeFilter} />
-      <ContactList contacts={visibleContacts} onDeleteContact={this.deleteContact}/>
-    </div>
+  return contacts.filter(contact =>
+    contact.name.toLowerCase().includes(lowerCaseFilter),
   );
+};
+
+
+render() {
+const visibleContacts = this.getVisibleContacts();
+
+return (
+  <div className={style.container}>
+    <h1 className={style.main_title}>Phonebook</h1>
+    <ContactForm onSubmit={this.formSubmitHandler} onCheck={this.checkName}/>
+        
+    <h2 className={style.title}>Contacts</h2>
+    <Filter value={this.state.filter} onChange={this.changeFilter} />
+    <ContactList contacts={visibleContacts} onDeleteContact={this.deleteContact}/>
+  </div>
+);
 }
 }
 
